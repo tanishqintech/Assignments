@@ -1,73 +1,59 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
 class Product
 {
-public:
-    string name;
-    float price;
-    int monthlySales[12];   // array to store sales for 12 months
+	public :
+	int productId;
+	string product_name;
+	float price;
+	int monthlySales[12];
 
-    void getData()
-    {
-        cout << "Enter product name: ";
-        cin >> name;
+void getData()
+{
+	cout<<"Enter product Id : ";
+	cin>>productId;
+	cout<<"Enter product name : ";
+	cin>>product_name;
+	cout<<"Enter the price of the product : ";
+	cin>>price;
+	cout<<"Enter sales for 12 months : \n";
+	for(int i=0; i < 12; i++)
+	{
+		cout<<"Month "<<i+1<<" : ";
+		cin>>monthlySales[i];
+	}
+}
+int TotalQty()
+{
+	int total = 0;
+	for(int i=0; i<12; i++)
+	{
+		total = total+monthlySales[i];
+	}
+	return total;
+}
 
-        cout << "Enter product price: ";
-        cin >> price;
+float TotalBill()
+{
+	return TotalQty()*price;
+}
 
-        cout << "Enter sales quantity for 12 months:\n";
-        for (int i = 0; i < 12; i++)
-        {
-            cout << "Month " << (i + 1) << ": ";
-            cin >> monthlySales[i];
-        }
-    }
-
-    int getTotalQuantity()
-    {
-        int total = 0;
-        for (int i = 0; i < 12; i++)
-        {
-            total = total + monthlySales[i];
-        }
-        return total;
-    }
-
-    float getTotalBill()
-    {
-        return getTotalQuantity() * price;
-    }
-
-    void display()
-    {
-        cout << "\nProduct Name: " << name;
-        cout << "\nPrice: " << price;
-        cout << "\nTotal Quantity Sold: " << getTotalQuantity();
-        cout << "\nTotal Bill: " << getTotalBill();
-        cout << "\n------------------------------\n";
-    }
+void Display()
+{
+	cout<<"\nProduct Id : "<<productId;
+	cout<<"\nProduct Name : "<<product_name;
+	cout<<"\nPrice of product : "<<price;
+	cout<<"\nTotal Qty : "<<TotalQty();
+	cout<<"\nTotal Bill : "<<TotalBill()<<endl;
+}
 };
+
 
 int main()
 {
-    int n;
-    cout << "Enter number of products: ";
-    cin >> n;
-
-    Product p[10];   // array of product objects (max 10 products)
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << "\nEnter details of product " << (i + 1) << ":\n";
-        p[i].getData();
-    }
-
-    cout << "\n===== PRODUCT DETAILS =====\n";
-    for (int i = 0; i < n; i++)
-    {
-        p[i].display();
-    }
-
-    return 0;
+	Product p;
+	p.getData();
+	p.Display();
+return 0;
 }
